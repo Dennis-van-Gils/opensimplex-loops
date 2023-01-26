@@ -67,10 +67,10 @@ Installation
 
 This will install the following dependencies:
 
-- `opensimplex`
-- `numpy`
-- `numba`
-- `numba-progress`
+- ``opensimplex``
+- ``numpy``
+- ``numba``
+- ``numba-progress``
 
 Notes:
 
@@ -84,9 +84,9 @@ Notes:
 
 - Note that the very first call of each of these OpenSimplex functions will take
   a longer time than later calls. This is because `numba` needs to compile this
-  Python code once to bytecode specific to your platform.
+  Python code to bytecode specific to your platform, once.
 
-- The `numba-progress` package is actually optional. When present, a progress
+- The ``numba-progress`` package is actually optional. When present, a progress
   bar will be shown during the noise generation.
 
 
