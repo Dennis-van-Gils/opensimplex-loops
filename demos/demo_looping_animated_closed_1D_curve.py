@@ -64,7 +64,7 @@ plt.show()
 if 0:
     anim.save(
         "demo_looping_animated_closed_1D_curve.gif",
-        dpi=150,
+        dpi=120,
         writer="imagemagick",
         fps=25,
     )
