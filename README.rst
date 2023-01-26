@@ -2,9 +2,6 @@
     :target: https://pypi.org/project/opensimplex-loops
 .. image:: https://img.shields.io/pypi/pyversions/opensimplex-loops
     :target: https://pypi.org/project/opensimplex-loops
-.. image:: https://requires.io/github/Dennis-van-Gils/opensimplex-loops/requirements.svg?branch=master
-    :target: https://requires.io/github/Dennis-van-Gils/opensimplex-loops/requirements/?branch=master
-    :alt: Requirements Status
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
 .. image:: https://img.shields.io/badge/License-MIT-purple.svg
