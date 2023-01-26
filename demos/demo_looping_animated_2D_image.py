@@ -69,7 +69,10 @@ plt.show()
 
 # Export images to disk?
 if 0:
-    from PIL import Image
+    try:
+        from PIL import Image
+    except ImportError:
+        sys.exit("Exporting images requires the `pillow` package.")
 
     pil_imgs = []
     for j in range(len(img_stack)):
