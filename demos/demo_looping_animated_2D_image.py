@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
-# Dennis van Gils (https://github.com/Dennis-van-Gils)
+"""Dennis van Gils (https://github.com/Dennis-van-Gils)
+"""
 
 import sys
 
@@ -67,7 +67,7 @@ plt.grid(False)
 plt.axis("off")
 plt.show()
 
-# Export images to disk
+# Export images to disk?
 if 0:
     from PIL import Image
 

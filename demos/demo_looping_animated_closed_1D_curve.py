@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
-# Dennis van Gils (https://github.com/Dennis-van-Gils)
+"""Dennis van Gils (https://github.com/Dennis-van-Gils)
+"""
 
 import sys
 
@@ -60,7 +60,7 @@ anim = animation.FuncAnimation(
 # plt.axis("off")
 plt.show()
 
-# Export image to disk
+# Export image to disk?
 if 0:
     anim.save(
         "demo_looping_animated_closed_1D_curve.gif",

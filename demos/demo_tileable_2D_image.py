@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
-# Dennis van Gils (https://github.com/Dennis-van-Gils)
+"""Dennis van Gils (https://github.com/Dennis-van-Gils)
+"""
 
 import sys
 
@@ -42,7 +42,7 @@ plt.grid(False)
 plt.axis("off")
 plt.show()
 
-# Export image to disk
+# Export image to disk?
 if 0:
     tiled_noise = np.tile((noise + 1) / 2, (3, 3))  # Scaled [0, 1]
     rgb_img = np.ndarray((3 * h, 3 * w, 3))
