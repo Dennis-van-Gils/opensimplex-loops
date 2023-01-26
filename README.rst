@@ -29,7 +29,7 @@ Demos
 ``looping_animated_2D_image()``
 -------------------------------
 
-    .. image:: images/demo_looping_animated_2D_image.gif
+    .. image:: https://github.com/Dennis-van-Gils/opensimplex-loops/blob/6126d11b97dfb057015067630ddb6a40c735f609/images/demo_looping_animated_2D_image.gif
         :alt: looping_animated_2D_image
 
     Seamlessly-looping animated 2D images.
@@ -39,7 +39,7 @@ Demos
 ``looping_animated_closed_1D_curve()``
 --------------------------------------
 
-    .. image:: images/demo_looping_animated_closed_1D_curve.gif
+    .. image:: https://github.com/Dennis-van-Gils/opensimplex-loops/blob/6126d11b97dfb057015067630ddb6a40c735f609/images/demo_looping_animated_closed_1D_curve.gif
         :alt: looping_animated_closed_1D_curve
 
     Seamlessly-looping animated 1D curves, each curve in turn also closing up
@@ -50,7 +50,7 @@ Demos
 ``tileable_2D_image()``
 -----------------------
 
-    .. image:: images/demo_tileable_2D_image.png
+    .. image:: https://github.com/Dennis-van-Gils/opensimplex-loops/blob/6126d11b97dfb057015067630ddb6a40c735f609/images/demo_tileable_2D_image.png
         :alt: tileable_2D_image
 
     Seamlessly-tileable 2D image.
