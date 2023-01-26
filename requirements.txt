@@ -1,3 +1,0 @@
-opensimplex ~= 0.4
-numba
-numba-progress

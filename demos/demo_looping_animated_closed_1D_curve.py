@@ -11,14 +11,14 @@ try:
 except ImportError:
     sys.exit("This demo requires the `matplotlib` package.")
 
-import opensimplex
+import opensimplex_loops as osl
 
 N_FRAMES = 50
 N_PIXELS = 256
 FEATURE_SIZE = 24.0
 
 # Generate noise
-curve_stack = opensimplex.looping_animated_closed_1D_curve(
+curve_stack = osl.looping_animated_closed_1D_curve(
     N_frames=N_FRAMES,
     N_pixels_x=N_PIXELS,
     t_step=0.1,

@@ -12,14 +12,14 @@ except ImportError:
     sys.exit("This demo requires the `matplotlib` package.")
 
 import numpy as np
-import opensimplex
+import opensimplex_loops as osl
 
 N_FRAMES = 50
 N_PIXELS = 256
 FEATURE_SIZE = 24.0
 
 # Generate noise
-img_stack = opensimplex.looping_animated_2D_image(
+img_stack = osl.looping_animated_2D_image(
     N_frames=N_FRAMES,
     N_pixels_x=N_PIXELS,
     N_pixels_y=N_PIXELS,

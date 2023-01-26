@@ -1,98 +1,74 @@
-.. image:: https://img.shields.io/pypi/v/opensimplex-loops
-    :target: https://pypi.org/project/opensimplex-loops
-.. image:: https://img.shields.io/pypi/pyversions/opensimplex-loops
-    :target: https://pypi.org/project/opensimplex-loops
-.. image:: https://requires.io/github/Dennis-van-Gils/opensimplex-loops/requirements.svg?branch=master
-    :target: https://requires.io/github/Dennis-van-Gils/opensimplex-loops/requirements/?branch=master
-    :alt: Requirements Status
-.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-    :target: https://github.com/psf/black
-.. image:: https://img.shields.io/badge/License-MIT-purple.svg
-    :target: https://github.com/Dennis-van-Gils/opensimplex-loops/blob/master/LICENSE.txt
-
-OpenSimplex Loops
-=================
-
-Extension to the `OpenSimplex Python library by lmas <https://github.com/lmas/opensimplex>`_.
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Extension to the `OpenSimplex Python library by lmas <https://github.com/lmas/opensimplex>`_.
 This library provides higher-level functions that can generate seamlessly-looping
 animated images and closed curves, and seamlessy-tileable images. It relies on 4D
 OpenSimplex noise.
 
-- Github: https://github.com/Dennis-van-Gils/opensimplex-loops
-- PyPI: https://pypi.org/project/opensimplex-loops
-
 Inspiration taken from
 `Coding Challenge #137: 4D OpenSimplex Noise Loop <https://youtu.be/3_0Ax95jIrk>`_
 by `The Coding Train <https://www.youtube.com/c/TheCodingTrain>`_.
+"""
+__author__ = "Dennis van Gils"
+__authoremail__ = "vangils.dennis@gmail.com"
+__url__ = "https://github.com/Dennis-van-Gils/opensimplex-loops"
+__date__ = "26-01-2023"
+__version__ = "0.1.0"
+# pylint: disable=invalid-name
+
+from typing import Union
+import time
+
+import numpy as np
+from opensimplex.api import DEFAULT_SEED
+from opensimplex.internals import _init
+
+try:
+    from numba_progress import ProgressBar
+except ImportError:
+    ProgressBar = None
+
+from internals import (
+    _looping_animated_2D_image,
+    _looping_animated_closed_1D_curve,
+    _tileable_2D_image,
+)
 
 
-Examples
-========
+def progress_bar_wrapper(
+    noise_fun: callable,
+    noise_kwargs: list,
+    verbose: bool = True,
+    total: int = 1,
+):
+    if verbose:
+        print(f"{'Generating noise...':30s}")
+        tick = time.perf_counter()
 
-``looping_animated_2D_image()``
--------------------------------
+    if (ProgressBar is None) or (not verbose):
+        out = noise_fun(**noise_kwargs)
+    else:
+        with ProgressBar(total=total, dynamic_ncols=True) as numba_progress:
+            out = noise_fun(**noise_kwargs, progress_hook=numba_progress)
 
-    Seamlessly-looping animated 2D images.
+    if verbose:
+        print(f"done in {(time.perf_counter() - tick):.2f} s")
 
-    .. image:: images/demo_looping_animated_2D_image.gif
-        :alt: looping_animated_2D_image
-
-``looping_animated_closed_1D_curve()``
---------------------------------------
-
-    Seamlessly-looping animated 1D curves, each curve in turn also closing up
-    seamlessly back-to-front.
-
-    .. image:: images/demo_looping_animated_closed_1D_curve.gif
-        :alt: looping_animated_closed_1D_curve
-
-``tileable_2D_image()``
------------------------
-
-    Seamlessly-tileable 2D image.
-
-    .. image:: images/demo_tileable_2D_image.png
-        :alt: tileable_2D_image
+    return out
 
 
-Installation
-============
-
-::
-
-    pip install opensimplex-loops
-
-This will install the following dependencies:
-
-- `opensimplex`
-- `numpy`
-- `numba`
-- `numba-progress`
-
-Notes:
-
-- The `OpenSimplex` library by Imas does not enforce the use of the
-  `numba <https://numba.pydata.org/>`_ package but is optional instead. Here
-  however, I have set it as a requirement due to the heavy computation required
-  by these highler-level functions. They are optimized for `numba`,
-  resulting in major speed improvements compared to as running without (TODO: mention factor)
-
-- The `numba-progress` package is actually optional. When present, a progress
-  bar will be shown during the noise generation.
-
-TODO
-====
-
-- Point out `demos`
-- Mention first-time `numba` compilation can be lengthy. Afterwards, way faster.
-
-API
-===
-
-``looping_animated_2D_image(...)``
-----------------------------------
-
-    Generates a stack of seamlessly-looping animated 2D raster images drawn
+def looping_animated_2D_image(
+    N_frames: int = 200,
+    N_pixels_x: int = 1000,
+    N_pixels_y: Union[int, None] = None,
+    t_step: float = 0.1,
+    x_step: float = 0.01,
+    y_step: Union[float, None] = None,
+    dtype: type = np.double,
+    seed: int = DEFAULT_SEED,
+    verbose: bool = True,
+) -> np.ndarray:
+    """Generates a stack of seamlessly-looping animated 2D raster images drawn
     from 4D OpenSimplex noise.
 
     The first two OpenSimplex dimensions are used to describe a plane that gets
@@ -137,11 +113,39 @@ API
         OpenSimplex noise values as floating points. The output is garantueed to
         be in the range [-1, 1], but the exact extrema cannot be known a-priori
         and are probably quite smaller than [-1, 1].
+    """
 
-``looping_animated_closed_1D_curve(...)``
------------------------------------------
+    perm, _ = _init(seed)
 
-    Generates a stack of seamlessly-looping animated 1D curves, each curve in
+    out = progress_bar_wrapper(
+        noise_fun=_looping_animated_2D_image,
+        noise_kwargs={
+            "N_frames": N_frames,
+            "N_pixels_x": N_pixels_x,
+            "N_pixels_y": N_pixels_y if N_pixels_y is not None else N_pixels_x,
+            "t_step": t_step,
+            "x_step": x_step,
+            "y_step": y_step if y_step is not None else x_step,
+            "dtype": dtype,
+            "perm": perm,
+        },
+        verbose=verbose,
+        total=N_frames,
+    )
+
+    return out
+
+
+def looping_animated_closed_1D_curve(
+    N_frames: int = 200,
+    N_pixels_x: int = 1000,
+    t_step: float = 0.1,
+    x_step: float = 0.01,
+    dtype: type = np.double,
+    seed: int = DEFAULT_SEED,
+    verbose: bool = True,
+) -> np.ndarray:
+    """Generates a stack of seamlessly-looping animated 1D curves, each curve in
     turn also closing up seamlessly back-to-front, drawn from 4D OpenSimplex
     noise.
 
@@ -179,11 +183,37 @@ API
         OpenSimplex noise values as floating points. The output is garantueed to
         be in the range [-1, 1], but the exact extrema cannot be known a-priori
         and are probably quite smaller than [-1, 1].
+    """
 
-``tileable_2D_image(...)``
---------------------------
+    perm, _ = _init(seed)  # The OpenSimplex seed table
 
-    Generates a seamlessly-tileable 2D raster image drawn from 4D OpenSimplex
+    out = progress_bar_wrapper(
+        noise_fun=_looping_animated_closed_1D_curve,
+        noise_kwargs={
+            "N_frames": N_frames,
+            "N_pixels_x": N_pixels_x,
+            "t_step": t_step,
+            "x_step": x_step,
+            "dtype": dtype,
+            "perm": perm,
+        },
+        verbose=verbose,
+        total=N_frames,
+    )
+
+    return out
+
+
+def tileable_2D_image(
+    N_pixels_x: int = 1000,
+    N_pixels_y: Union[int, None] = None,
+    x_step: float = 0.01,
+    y_step: Union[float, None] = None,
+    dtype: type = np.double,
+    seed: int = DEFAULT_SEED,
+    verbose: bool = True,
+) -> np.ndarray:
+    """Generates a seamlessly-tileable 2D raster image drawn from 4D OpenSimplex
     noise.
 
     The first two OpenSimplex dimensions are used to describe a circle that gets
@@ -223,3 +253,22 @@ API
         OpenSimplex noise values as floating points. The output is garantueed to
         be in the range [-1, 1], but the exact extrema cannot be known a-priori
         and are probably quite smaller than [-1, 1].
+    """
+
+    perm, _ = _init(seed)
+
+    out = progress_bar_wrapper(
+        noise_fun=_tileable_2D_image,
+        noise_kwargs={
+            "N_pixels_x": N_pixels_x,
+            "N_pixels_y": N_pixels_y if N_pixels_y is not None else N_pixels_x,
+            "x_step": x_step,
+            "y_step": y_step if y_step is not None else x_step,
+            "dtype": dtype,
+            "perm": perm,
+        },
+        verbose=verbose,
+        total=N_pixels_y,
+    )
+
+    return out

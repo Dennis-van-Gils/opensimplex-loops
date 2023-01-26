@@ -1,4 +1,14 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Internal functions belonging to `opensimplex_loops.py`.
+"""
+__author__ = "Dennis van Gils"
+__authoremail__ = "vangils.dennis@gmail.com"
+__url__ = "https://github.com/Dennis-van-Gils/opensimplex-loops"
+# pylint: disable=invalid-name
+
 from typing import Union
+
 import numpy as np
 from opensimplex.internals import _noise4
 
@@ -7,7 +17,7 @@ try:
 except ImportError:
     prange = range
 
-    def njit(*args, **kwargs):
+    def njit(*args, **kwargs):  # pylint: disable=unused-argument
         def wrapper(func):
             return func
 
