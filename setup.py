@@ -79,5 +79,10 @@ setup(
         "numba",
         "numba-progress",
     ],
-    extras_require={},
+    extras_require={
+        "demos": [
+            "matplotlib",
+            "pillow",
+        ],
+    },
 )
