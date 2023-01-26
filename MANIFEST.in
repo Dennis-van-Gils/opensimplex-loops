@@ -1,0 +1,4 @@
+include *.rst
+recursive-include demos *.py
+recursive-include images *.gif
+recursive-include images *.png
