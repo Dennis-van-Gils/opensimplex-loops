@@ -23,33 +23,39 @@ Inspiration taken from
 by `The Coding Train <https://www.youtube.com/c/TheCodingTrain>`_.
 
 
-Examples
-========
+Demos
+=====
 
 ``looping_animated_2D_image()``
 -------------------------------
 
-    Seamlessly-looping animated 2D images.
-
     .. image:: images/demo_looping_animated_2D_image.gif
         :alt: looping_animated_2D_image
+
+    Seamlessly-looping animated 2D images.
+
+    Code: `<demos/demo_looping_animated_2D_image.py>`_
 
 ``looping_animated_closed_1D_curve()``
 --------------------------------------
 
+    .. image:: images/demo_looping_animated_closed_1D_curve.gif
+        :alt: looping_animated_closed_1D_curve
+
     Seamlessly-looping animated 1D curves, each curve in turn also closing up
     seamlessly back-to-front.
 
-    .. image:: images/demo_looping_animated_closed_1D_curve.gif
-        :alt: looping_animated_closed_1D_curve
+    Code: `<demos/demo_looping_animated_closed_1D_curve.py>`_
 
 ``tileable_2D_image()``
 -----------------------
 
-    Seamlessly-tileable 2D image.
-
     .. image:: images/demo_tileable_2D_image.png
         :alt: tileable_2D_image
+
+    Seamlessly-tileable 2D image.
+
+    Code: `<demos/demo_tileable_2D_image.py>`_
 
 
 Installation
@@ -68,20 +74,21 @@ This will install the following dependencies:
 
 Notes:
 
-- The `OpenSimplex` library by Imas does not enforce the use of the
-  `numba <https://numba.pydata.org/>`_ package but is optional instead. Here
-  however, I have set it as a requirement due to the heavy computation required
-  by these highler-level functions. They are optimized for `numba`,
-  resulting in major speed improvements compared to as running without (TODO: mention factor)
+- The `OpenSimplex` library by lmas does not enforce the use of the
+  `numba <https://numba.pydata.org/>`_ package, but is left optional instead.
+  Here, I have set it as a requirement due to the heavy computation required
+  by these highler-level functions. I have them optimized for `numba` which
+  enables multi-core parallel processing within Python, resulting in major
+  speed improvements compared to as running without. I have gotten computational
+  speedups by a factor of ~200.
+
+- Note that the very first call of each of these OpenSimplex functions will take
+  a longer time than later calls. This is because `numba` needs to compile this
+  Python code once to bytecode specific to your platform.
 
 - The `numba-progress` package is actually optional. When present, a progress
   bar will be shown during the noise generation.
 
-TODO
-====
-
-- Point out `demos`
-- Mention first-time `numba` compilation can be lengthy. Afterwards, way faster.
 
 API
 ===
