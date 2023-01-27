@@ -223,7 +223,7 @@ API
             package is present a progress bar will also be shown.
 
     Returns:
-        The 2D image stack as 3D array [time, y-pixel, x-pixel] containing the
+        The 2D image as 2D array [y-pixel, x-pixel] containing the
         OpenSimplex noise values as floating points. The output is garantueed to
         be in the range [-1, 1], but the exact extrema cannot be known a-priori
         and are probably quite smaller than [-1, 1].
