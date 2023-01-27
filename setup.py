@@ -26,7 +26,7 @@ setup(
     name="opensimplex-loops",
     version="0.1.3",
     license="MIT",
-    description="Extension to the OpenSimplex Python library. This library can generate seamlessly-looping animated images and closed curves, and seamlessy-tileable images.",
+    description="Python library to generate seamlessly-looping animated images and closed curves, and seamlessy-tileable images. Based on 4D OpenSimplex noise.",
     long_description="%s\n%s"
     % (
         re.compile("^.. start-badges.*^.. end-badges", re.M | re.S).sub(
