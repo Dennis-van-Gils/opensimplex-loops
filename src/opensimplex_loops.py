@@ -12,8 +12,8 @@ by `The Coding Train <https://www.youtube.com/c/TheCodingTrain>`_.
 __author__ = "Dennis van Gils"
 __authoremail__ = "vangils.dennis@gmail.com"
 __url__ = "https://github.com/Dennis-van-Gils/opensimplex-loops"
-__date__ = "26-01-2023"
-__version__ = "0.1.2"
+__date__ = "27-01-2023"
+__version__ = "0.1.3"
 # pylint: disable=invalid-name
 
 from typing import Union
@@ -29,9 +29,8 @@ except ImportError:
     ProgressBar = None
 
 from internals import (
-    _looping_animated_2D_image,
-    _looping_animated_closed_1D_curve,
-    _tileable_2D_image,
+    _polar_loop_rectangle,
+    _double_polar_loop,
 )
 
 
@@ -118,14 +117,14 @@ def looping_animated_2D_image(
     perm, _ = _init(seed)
 
     out = progress_bar_wrapper(
-        noise_fun=_looping_animated_2D_image,
+        noise_fun=_polar_loop_rectangle,
         noise_kwargs={
-            "N_frames": N_frames,
-            "N_pixels_x": N_pixels_x,
-            "N_pixels_y": N_pixels_y if N_pixels_y is not None else N_pixels_x,
-            "t_step": t_step,
-            "x_step": x_step,
-            "y_step": y_step if y_step is not None else x_step,
+            "N_polar": N_frames,
+            "N_rect_x": N_pixels_x,
+            "N_rect_y": N_pixels_y if N_pixels_y is not None else N_pixels_x,
+            "step_polar": t_step,
+            "step_rect_x": x_step,
+            "step_rect_y": y_step if y_step is not None else x_step,
             "dtype": dtype,
             "perm": perm,
         },
@@ -188,12 +187,12 @@ def looping_animated_closed_1D_curve(
     perm, _ = _init(seed)  # The OpenSimplex seed table
 
     out = progress_bar_wrapper(
-        noise_fun=_looping_animated_closed_1D_curve,
+        noise_fun=_double_polar_loop,
         noise_kwargs={
-            "N_frames": N_frames,
-            "N_pixels_x": N_pixels_x,
-            "t_step": t_step,
-            "x_step": x_step,
+            "N_polar_1": N_pixels_x,
+            "N_polar_2": N_frames,
+            "step_polar_1": x_step,
+            "step_polar_2": t_step,
             "dtype": dtype,
             "perm": perm,
         },
@@ -249,7 +248,7 @@ def tileable_2D_image(
             package is present a progress bar will also be shown.
 
     Returns:
-        The 2D image stack as 3D array [time, y-pixel, x-pixel] containing the
+        The 2D image as 2D array [y-pixel, x-pixel] containing the
         OpenSimplex noise values as floating points. The output is garantueed to
         be in the range [-1, 1], but the exact extrema cannot be known a-priori
         and are probably quite smaller than [-1, 1].
@@ -258,12 +257,12 @@ def tileable_2D_image(
     perm, _ = _init(seed)
 
     out = progress_bar_wrapper(
-        noise_fun=_tileable_2D_image,
+        noise_fun=_double_polar_loop,
         noise_kwargs={
-            "N_pixels_x": N_pixels_x,
-            "N_pixels_y": N_pixels_y if N_pixels_y is not None else N_pixels_x,
-            "x_step": x_step,
-            "y_step": y_step if y_step is not None else x_step,
+            "N_polar_1": N_pixels_x,
+            "N_polar_2": N_pixels_y if N_pixels_y is not None else N_pixels_x,
+            "step_polar_1": x_step,
+            "step_polar_2": y_step if y_step is not None else x_step,
             "dtype": dtype,
             "perm": perm,
         },
