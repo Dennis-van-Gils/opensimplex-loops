@@ -39,11 +39,16 @@ Demos
 ``looping_animated_closed_1D_curve()``
 --------------------------------------
 
+    .. image:: https://raw.githubusercontent.com/Dennis-van-Gils/opensimplex-loops/master/images/demo_looping_animated_circle.gif
+        :alt: looping_animated_circle
+
     .. image:: https://raw.githubusercontent.com/Dennis-van-Gils/opensimplex-loops/master/images/demo_looping_animated_closed_1D_curve.gif
         :alt: looping_animated_closed_1D_curve
 
     Seamlessly-looping animated 1D curves, each curve in turn also closing up
     seamlessly back-to-front.
+
+    Code: `<demos/demo_looping_animated_circle.py>`_
 
     Code: `<demos/demo_looping_animated_closed_1D_curve.py>`_
 
