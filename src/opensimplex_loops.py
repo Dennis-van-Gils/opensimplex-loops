@@ -13,7 +13,7 @@ __author__ = "Dennis van Gils"
 __authoremail__ = "vangils.dennis@gmail.com"
 __url__ = "https://github.com/Dennis-van-Gils/opensimplex-loops"
 __date__ = "27-01-2023"
-__version__ = "0.1.3"
+__version__ = "1.0.0"
 # pylint: disable=invalid-name
 
 from typing import Union

@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 setup(
     name="opensimplex-loops",
-    version="0.1.3",
+    version="1.0.0",
     license="MIT",
     description="Python library to generate seamlessly-looping animated images and closed curves, and seamlessy-tileable images. Based on 4D OpenSimplex noise.",
     long_description="%s\n%s"
@@ -54,6 +54,7 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Topic :: Scientific/Engineering :: Mathematics",
     ],
     project_urls={

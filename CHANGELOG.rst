@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.0.0 (2023-08-27)
+------------------
+* Stable release
+* Added looping animated circle demo
+
 0.1.3 (2023-01-27)
 ------------------
 * Fixed wrong docstr description on the return value of `tileable_2D_image()`
