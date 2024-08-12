@@ -6,6 +6,8 @@
     :target: https://github.com/psf/black
 .. image:: https://img.shields.io/badge/License-MIT-purple.svg
     :target: https://github.com/Dennis-van-Gils/opensimplex-loops/blob/master/LICENSE.txt
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.13304280.svg
+    :target: https://doi.org/10.5281/zenodo.13304280
 
 OpenSimplex Loops
 =================
