@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.0.1 (2024-08-12)
+------------------
+* Obtained a DOI from Zenodo
+
 1.0.0 (2023-08-27)
 ------------------
 * Stable release
