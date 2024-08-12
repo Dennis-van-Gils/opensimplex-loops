@@ -10,13 +10,17 @@
 OpenSimplex Loops
 =================
 
-Extension to the `OpenSimplex Python library by lmas <https://github.com/lmas/opensimplex>`_.
 This library provides higher-level functions that can generate seamlessly-looping
 animated images and closed curves, and seamlessy-tileable images. It relies on 4D
-OpenSimplex noise.
+OpenSimplex noise, which is a type of
+`gradient noise <https://en.wikipedia.org/wiki/Gradient_noise>`_ that features
+spatial coherence.
 
 - Github: https://github.com/Dennis-van-Gils/opensimplex-loops
 - PyPI: https://pypi.org/project/opensimplex-loops
+
+This library is an extension to the
+`OpenSimplex Python library by lmas <https://github.com/lmas/opensimplex>`_.
 
 Inspiration taken from
 `Coding Challenge #137: 4D OpenSimplex Noise Loop <https://youtu.be/3_0Ax95jIrk>`_
